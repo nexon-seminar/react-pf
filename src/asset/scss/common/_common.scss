@@ -1,0 +1,236 @@
+// title style
+@mixin titleStyle(
+  $fz: $fontXXXL,
+  $fw: 800,
+  $lh: 1.8,
+  $c: #222,
+  $ff: $titleFont
+) {
+  font-family: $ff;
+  font-size: $fz;
+  line-height: $lh;
+  font-weight: $fw;
+  color: $c;
+}
+
+@mixin titleStyle2(
+  $fz: $fontXXL,
+  $fw: 800,
+  $lh: 1.8,
+  $c: #222,
+  $ff: $subTitle
+) {
+  font-family: $ff;
+  font-size: $fz;
+  line-height: $lh;
+  font-weight: $fw;
+  color: $c;
+}
+
+//본문 txt
+@mixin txtStyle($fz: $fontS, $fw: 400, $lh: 1.5, $c: #999, $ff: $titleFont) {
+  font-family: $ff;
+  font-size: $fz;
+  line-height: $lh;
+  font-weight: $fw;
+  color: $c;
+}
+::placeholder {
+  @include txtStyle($fw: 500, $fz: $fontXL, $c: #555);
+}
+
+textarea::placeholder {
+  font-size: $fontL;
+}
+
+@media screen and (max-width: $tablet) {
+  ::placeholder {
+    font-size: $fontL;
+  }
+}
+@mixin txtStyle2($fz: $fontS, $fw: 400, $lh: 1.5, $c: #999, $ff: $txtFont) {
+  font-family: $ff;
+  font-size: $fz;
+  line-height: $lh;
+  font-weight: $fw;
+  color: $c;
+}
+
+//clear both
+@mixin cb() {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+//가상선택자
+@mixin pseudo($po: absolute, $t: auto, $l: auto, $r: auto, $b: auto) {
+  content: "";
+  display: block;
+  position: absolute;
+  top: $t;
+  left: $l;
+  right: $r;
+  bottom: $b;
+}
+
+//txt ellipsis
+@mixin ellipsis($line-cnt, $line-height) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line-cnt;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: $line-height;
+}
+
+//el center
+@mixin center() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//loading
+.loader {
+  @include center();
+  width: 120px;
+  height: 75px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.ball {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #fff;
+  animation: bounce 0.5s alternate infinite;
+}
+
+.ball:nth-child(2) {
+  animation-delay: 0.16s;
+}
+
+.ball:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+@keyframes bounce {
+  from {
+    tranform: scaleX(1.25);
+  }
+  to {
+    transform: translateY(-50px) scaleX(1);
+  }
+}
+
+//animation
+$easing: cubic-bezier(0.33, 1, 0.68, 1);
+@mixin commonTransition($easing: $easing, $duration: 0.5s, $transform: 2vh) {
+  opacity: 0;
+  transform: translateY($transform);
+  transition: transform $duration $easing, opacity $duration $easing,
+    background-color $duration $easing, color $duration $easing;
+}
+
+.ani-content {
+  @include commonTransition();
+  &.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@for $i from 1 through 50 {
+  .ani-content {
+    .list#{$i} {
+      @include commonTransition($transform: 10vh);
+      transition-delay: ($i * 0.25s);
+    }
+    &.active {
+      .list#{$i} {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+@for $i from 1 through 13 {
+  .ani-content2 {
+    opacity: 0;
+    transform: translateY(100px);
+    &:nth-child(#{$i}) {
+      animation: fadeIn 1s $easing forwards;
+      @if ($i == 1) {
+        animation-delay: 0.25s;
+      } @else {
+        animation-delay: ($i * 0.25s);
+      }
+    }
+  }
+  @keyframes fadeIn {
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.ani-orderTitle {
+  opacity: 0;
+  animation: titleFadeIn 0.8s $easing forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes titleFadeIn {
+  100% {
+    opacity: 1;
+  }
+}
+
+@for $i from 1 through 13 {
+  .ani-content3 {
+    opacity: 0;
+    transform: translateX(-50px);
+    &:nth-child(#{$i}) {
+      animation: fadeIn 1s $easing forwards;
+      @if ($i == 1) {
+        animation-delay: 0.25s;
+      } @else {
+        animation-delay: ($i * 0.25s);
+      }
+    }
+  }
+  @keyframes fadeIn {
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+@for $i from 1 through 13 {
+  .ani-content4 {
+    opacity: 0;
+    transform: translateX(50px);
+    &:nth-child(#{$i}) {
+      animation: fadeIn 1s $easing forwards;
+      @if ($i == 1) {
+        animation-delay: 0.25s;
+      } @else {
+        animation-delay: ($i * 0.25s);
+      }
+    }
+  }
+  @keyframes fadeIn {
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}

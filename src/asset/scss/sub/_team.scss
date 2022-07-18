@@ -1,0 +1,119 @@
+.Team {
+  > .inner {
+    .wrap {
+      margin-top: 130px;
+      &::after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+      article {
+        width: 33.333%;
+        float: left;
+        padding: 10px;
+        margin-bottom: 100px;
+
+        &:nth-child(3n - 1) {
+          position: relative;
+          top: -150px;
+        }
+
+        .inner {
+          width: 100%;
+          .pic {
+            width: 100%;
+            height: 600px;
+            background: #000;
+            margin-bottom: 20px;
+            transition: 0.5s;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+
+            &:hover {
+              filter: saturate(1.2);
+            }
+          }
+
+          h3 {
+            @include titleStyle($fw: 800, $c: #eee, $fz: $fontXXL);
+          }
+
+          p {
+            @include txtStyle($fw: 400, $c: #999, $fz: $fontL);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .Team {
+    > .inner {
+      padding: 100px 30px;
+      .titleWrap {
+        padding-top: 100px;
+      }
+      .depth2 {
+        margin-top: 100px;
+      }
+      .wrap {
+        article {
+          width: 50%;
+          padding-left: 0;
+          &:nth-child(3n-1) {
+            position: relative;
+            top: 0;
+          }
+          &:nth-child(2n) {
+            position: relative;
+            top: -100px;
+            padding-left: 10px;
+            padding-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $mp) {
+  .Team {
+    > .inner {
+      padding: 100px 30px 0;
+      .titleWrap {
+        padding-top: 50px;
+      }
+      .depth2 {
+        margin-top: 20px;
+        &::before {
+          top: -40px;
+        }
+      }
+      .wrap {
+        margin-top: 0px;
+        article {
+          width: 100%;
+          padding: 0;
+          &:nth-child(2n) {
+            position: relative;
+            top: 0;
+            padding: 0;
+          }
+          .inner {
+            h3 {
+              font-size: $fontXL;
+              p {
+                font-size: $fontM;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

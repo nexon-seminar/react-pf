@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@300;400;500;600;700;800&family=Urbanist:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+//media size
+$tablet: 1270px;
+$mp: 700px;
+
+//font family
+$titleFont: "Urbanist", sans-serif;
+$txtFont: "Open Sans", sans-serif;
+$subTitle: "Montserrat", sans-serif;
+
+//font size
+$fontXXXL: 8rem;
+$fontXXL: 2rem;
+$fontXL: 1.5rem;
+$fontL: 1.2rem;
+$fontM: 1rem;
+$fontS: 0.85rem;
+
+//color
+$maincolor: red;
+
+//easing
+$easing: ease;
+
+//common
+@import "common/common";
+@import "common/reset";
+@import "common/layout";
+@import "common/header";
+@import "common/footer";
+@import "common/menu";
+@import "common/popup";
+
+//main
+@import "main/visual";
+@import "main/news";
+@import "main/pics";
+@import "main/vids";
+
+//sub {
+@import "sub/about";
+@import "sub/youtube";
+@import "sub/gallery";
+@import "sub/location";
+@import "sub/contacts";
+@import "sub/join";
+@import "sub/team";
+@import "sub/work";
+@import "sub/news";

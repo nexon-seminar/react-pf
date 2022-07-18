@@ -1,0 +1,34 @@
+{
+  "members": [
+    {
+      "name": "Leanne",
+      "position": "CEO",
+      "pic": "member1.jpg"
+    },
+    {
+      "name": "Aiden",
+      "position": "Vice President",
+      "pic": "member2.jpg"
+    },
+    {
+      "name": "Dennis",
+      "position": "UI Designer",
+      "pic": "member3.jpg"
+    },
+    {
+      "name": "Johns",
+      "position": "Front-end Dev",
+      "pic": "member4.jpg"
+    },
+    {
+      "name": "Glenna",
+      "position": "Back-en Dev",
+      "pic": "member5.jpg"
+    },
+    {
+      "name": "Nicholas",
+      "position": "Project Manager",
+      "pic": "member6.jpg"
+    }
+  ]
+}

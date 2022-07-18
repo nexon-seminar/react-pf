@@ -1,0 +1,161 @@
+.content {
+  > .inner {
+    min-height: 800px;
+    padding: 200px 100px 100px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: 1s;
+    .depth2 {
+      position: absolute;
+      right: 0;
+      top: 80px;
+      text-align: right;
+      &::before {
+        @include pseudo($t: -110px, $r: 0);
+        width: 30px;
+        height: 2px;
+        background: #333;
+      }
+      a {
+        @include titleStyle($fw: 400, $c: #fff, $fz: $fontXL);
+      }
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: auto;
+    }
+    .titleWrap {
+      position: relative;
+      padding-bottom: 100px;
+      p {
+        position: absolute;
+        right: 100px;
+        bottom: 40px;
+        @include txtStyle($fw: 400, $c: #fff, $fz: $fontXL);
+      }
+    }
+    h2 {
+      display: inline-block;
+      padding-right: 180px;
+      @include titleStyle($fw: 400, $c: #fff, $ff: $subTitle);
+      opacity: 0;
+      transition: 0.5s ease;
+      transform: translateX(-100px);
+      background-color: #000;
+      &::before {
+        @include pseudo($b: -130px, $l: 0);
+        width: 60px;
+        height: 5px;
+        background: #333;
+      }
+    }
+  }
+
+  &.on {
+    > .inner {
+      transform: translateY(0px);
+      opacity: 1;
+
+      h2 {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.top {
+  position: fixed;
+  right: 100px;
+  bottom: 100px;
+  width: 100px;
+  height: 100px;
+  font-size: 30px;
+  border: 1px solid #555;
+  border-radius: 50%;
+  background-color: #fff;
+  transform: translateY(50px);
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s ease;
+  z-index: 10;
+  cursor: pointer;
+  &.on {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0px);
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .content {
+    > .inner {
+      min-height: 600px;
+      padding: 100px 30px;
+      .depth2 {
+        top: 80px;
+        text-align: right;
+        a {
+          font-size: $fontXL;
+        }
+      }
+      h2 {
+        font-size: 5rem;
+        &::before {
+          margin-bottom: 40px;
+        }
+      }
+    }
+  }
+
+  .top {
+    right: 30px;
+    bottom: 30px;
+    width: 90px;
+    height: 90px;
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: $mp) {
+  .content {
+    > .inner {
+      min-height: 600px;
+      padding: 100px 30px;
+      .depth2 {
+        position: relative;
+        text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 0;
+        li {
+          margin-left: 20px;
+        }
+        a {
+          font-size: $fontL;
+        }
+      }
+      .titleWrap {
+        padding-top: 50px;
+        p {
+        }
+      }
+      h2 {
+        font-size: 3rem;
+        padding-right: 0;
+        &::before {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .top {
+    right: 30px;
+    bottom: 30px;
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+  }
+}

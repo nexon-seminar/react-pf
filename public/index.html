@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2, minimum-scale=0.8" />
+  <title>Neige</title>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0aed7cff3e69be6d99e79138ccf791f5"></script>
+</head>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  .loader {
+    width: 120px;
+    height: 75px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+
+
+  .ball {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #fff;
+    animation: bounce .5s alternate infinite;
+  }
+
+  .ball:nth-child(2) {
+    animation-delay: .16s;
+  }
+
+  .ball:nth-child(3) {
+    animation-delay: .32s;
+  }
+
+  @keyframes bounce {
+    from {
+      tranform: scaleX(1.25);
+    }
+
+    to {
+      transform: translateY(-50px) scaleX(1)
+    }
+  }
+
+  .default {
+    position: absolute;
+    top: -99999px;
+  }
+
+  .mask {
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 110;
+    transform: translateY(0);
+    transition: all 2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: 18px/1 'arial';
+    color: #fff;
+  }
+
+  .mask.off {
+    transform: translateY(-100%)
+  }
+</style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root">
+  </div>
+
+  <div class="default"></div>
+  <div class="mask">
+    <div class="loader">
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+    </div>
+  </div>
+
+  <script>
+    const imgs = [
+      "https://images.unsplash.com/photo-1635696802234-d86ae1d8a992?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1964&q=80",
+      "https://images.unsplash.com/photo-1585584563699-0ae01ba660dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1964&q=80",
+      "https://images.unsplash.com/photo-1606936635253-3af20c64bb9a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1976&q=80",
+      "https://images.unsplash.com/photo-1550630997-c46a95b7c1b3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1965&q=80",
+      "https://images.unsplash.com/photo-1626320381879-4a80fe262e2e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80",
+      "https://images.unsplash.com/photo-1606936635253-3af20c64bb9a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1976&q=80",
+      "https://images.unsplash.com/photo-1617062004315-a7c65e9015c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80",
+      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1976&q=80",
+      "https://images.unsplash.com/photo-1627440952393-03eab14bef25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80",
+      "https://images.unsplash.com/photo-1635868388973-c49ca747a83b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+    ];
+    const lenImg = imgs.length;
+    const defaults = document.querySelector('.default');
+    const mask = document.querySelector('.mask');
+    let tags = '';
+
+    //동적으로 배열에 있는 이미지, 영상 소스를 가지고 index.html에 DOM강제생성
+    //DOM이 생성되면서 수반되는  영상, 소스이미지가 브라우저에 캐싱되는 동안에는 mask화면 보여줌
+    //모든 영상, 소스이미지가 캐싱완료되면 마스크와 강제로 만들어진 DOM프레임인 defaults를 모두 제거
+    //그 사이 React 컴포넌트 파일들이 모두 리얼돔으로 변환되서 화면출력되 있음
+
+    createDOM();
+
+    //Promise.all()로 loadImg, loadVid함수가 모두 프로미스 객체를 반환할때까지 기다리다 동기화처리
+    Promise.all([loadImg()]).then(result => {
+      //각 함수의 리턴값을 비구조화 할당으로 변수에 각각 저장
+      [loadedImg] = result;
+
+      //두개의 값이 모두 true를 리턴하면 (모든 DOM소스가 로딩완료되면)
+      if (loadedImg) {
+        mask.classList.add('off');
+        setTimeout(() => {
+          mask.remove();
+          defaults.remove();
+        }, 2000)
+      }
+    })
+
+    //DOM생성함수
+    function createDOM() {
+      imgs.forEach(src => {
+        tags += `<img src=${src} />`
+      })
+      defaults.innerHTML = tags;
+    }
+
+    //이미지 소스가 모두 로딩되면 프로미스 객체로 true반환 함수
+    function loadImg() {
+      return new Promise((res, rej) => {
+        let countImg = 0;
+        const imgDOM = defaults.querySelectorAll('img');
+
+        imgDOM.forEach((img) => {
+          img.onload = () => {
+            countImg++;
+            if (countImg === lenImg) {
+              res(true);
+            }
+          }
+        })
+      })
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,388 @@
+#visual {
+  width: 100%;
+  background: #000;
+  position: relative;
+  padding: 150px 100px 200px;
+  &.on {
+    .pic {
+      &::after {
+        transform: translateY(-100%) rotate(-7deg);
+      }
+    }
+    .txt {
+      .subTitle2 span,
+      p span {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+    }
+    .subTitle {
+      span {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+    }
+    .num {
+      strong,
+      span {
+        i {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+      }
+      strong {
+        &::after {
+          width: 150px;
+        }
+      }
+    }
+  }
+  &.hide {
+    .pic {
+      &::after {
+        transform: translateY(0) rotate(10deg);
+      }
+    }
+    .txt {
+      .subTitle2 span,
+      p span {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(50px);
+      }
+    }
+    .subTitle {
+      span {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(50px);
+      }
+    }
+    .num {
+      strong,
+      span {
+        i {
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(50%);
+          transition-delay: 0s;
+        }
+      }
+      strong {
+        &::after {
+          width: 0;
+          transition-delay: 0s;
+        }
+      }
+    }
+  }
+  .cursor {
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    position: fixed;
+    border-radius: 50%;
+    top: -99999px;
+    left: 0;
+    z-index: 5;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: transform 0.3s;
+  }
+  .titleWrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 150px 100px 0;
+    width: 100%;
+  }
+  .title {
+    position: relative;
+    z-index: 1;
+    @include titleStyle(
+      $fw: 400,
+      $c: #fff,
+      $ff: $subTitle,
+      $lh: 1.2,
+      $fz: 7rem
+    );
+    margin-right: 70px;
+    overflow: hidden;
+  }
+  .subTitle {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    @include titleStyle($fw: 400, $c: #aaa, $lh: 1.3, $fz: $fontL);
+    span {
+      display: block;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(50px);
+      transition: 1s $easing;
+    }
+  }
+  .txt {
+    position: absolute;
+    right: 0;
+    top: 50vh;
+    width: 30vw;
+    padding-left: 100px;
+    text-align: left;
+    @include txtStyle2($fz: $fontM, $c: #999);
+    .subTitle2 {
+      margin-bottom: 20px;
+      @include titleStyle($fw: 600, $c: #fff, $lh: 1.3, $fz: $fontXL);
+      overflow: hidden;
+      span {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(50px);
+        transition: 1s $easing;
+      }
+    }
+    p {
+      overflow: hidden;
+      span {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(30px);
+        transition: 0.7s $easing;
+        transition-delay: 0.3s;
+        @include ellipsis(5, 1.5);
+      }
+    }
+  }
+  .pic {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 100px 0 0;
+    overflow: hidden;
+    text-align: center;
+    img {
+      position: absolute;
+      top: 200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 33.887%;
+      height: 77%;
+      object-fit: cover;
+    }
+    &::after {
+      @include pseudo($t: 0, $l: -20%);
+      width: 140%;
+      height: calc(100vh + 10vh);
+      transform: translateY(0) rotate(-7deg);
+      background-color: #000;
+      transition: all 1s $easing;
+      transform-origin: bottom;
+    }
+  }
+  .btn {
+    position: absolute;
+    right: 100px;
+    top: 65vh;
+    margin-top: -110px;
+    z-index: 1;
+    button {
+      outline: none;
+      border: none;
+      background: none;
+      margin-left: 60px;
+      cursor: pointer;
+    }
+    svg {
+      width: 80px;
+      fill: #fff;
+    }
+  }
+  .num {
+    position: relative;
+    top: 50px;
+    display: inline-block;
+    @include titleStyle($fw: 600, $c: #fff, $lh: 1.3, $fz: $fontXL);
+    strong {
+      position: relative;
+      display: inline-block;
+      font-weight: 600;
+      padding-right: 170px;
+      margin-right: 20px;
+      overflow: hidden;
+      &::after {
+        @include pseudo($l: 50px, $t: 50%);
+        width: 0;
+        height: 2px;
+        margin-top: -1px;
+        background-color: #fff;
+        transition: 0.6s $easing;
+        transition-delay: 0.3s;
+      }
+      i {
+        display: block;
+        float: left;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(50%);
+        transition: 0.5s $easing;
+      }
+    }
+    span {
+      overflow: hidden;
+      i {
+        display: block;
+        float: right;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(50%);
+        transition: 0.5s $easing;
+        transition-delay: 0.9s;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  #visual .title {
+    margin-right: calc(30vw - 60px);
+    font-size: 7vw;
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  #visual {
+    padding: 150px 30px 0;
+    .titleWrap {
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+    &.on {
+      .num {
+        strong {
+          &::after {
+            width: 70px;
+          }
+        }
+      }
+    }
+    &.hide {
+      .txt {
+        .subTitle2 span,
+        p span {
+          transform: translateY(20px);
+        }
+      }
+      .subTitle {
+        span {
+          transform: translateY(20px);
+        }
+      }
+    }
+    .cursor {
+      display: none;
+    }
+    .title {
+      font-size: 5rem;
+    }
+    .txt {
+      padding-left: 50px;
+    }
+    .pic {
+      img {
+        height: 57vh;
+      }
+    }
+    .btn {
+      right: 30px;
+      svg {
+        width: 50px;
+      }
+    }
+    .num {
+      strong {
+        padding-right: 100px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 910px) {
+  #visual {
+    .title {
+      margin-right: calc(30vw - 40px);
+      font-size: 7.5vw;
+    }
+    .pic {
+      min-height: 77vh;
+      img {
+        width: 42%;
+        height: 47vh;
+      }
+    }
+    .txt {
+      top: 45vh;
+      p {
+        span {
+          @include ellipsis(3, 1.5);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #visual {
+    .title {
+      margin-right: 0;
+      font-size: 7.5vw;
+    }
+    .num {
+      top: 20px;
+      font-size: $fontM;
+      strong::after {
+        left: 40px;
+      }
+    }
+    .pic {
+      text-align: left;
+      min-height: 55vh;
+      overflow: hidden;
+      img {
+        position: inherit;
+        top: 0;
+        width: 50%;
+        height: 35vh;
+      }
+    }
+    .txt {
+      display: none;
+    }
+    .btn {
+      width: 100%;
+      top: 68%;
+      margin-top: 0;
+      button {
+        &.next {
+          float: right;
+        }
+      }
+    }
+    .subTitle {
+      width: 100%;
+      text-align: center;
+    }
+    .titleWrap {
+      padding-right: 0;
+      padding-left: 0;
+      padding-top: 0;
+      position: relative;
+      z-index: 1;
+    }
+  }
+}

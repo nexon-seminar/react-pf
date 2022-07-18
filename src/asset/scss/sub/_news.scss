@@ -1,0 +1,467 @@
+.News {
+  .write {
+    position: relative;
+    z-index: 1;
+    text-align: right;
+    margin: -100px 100px 60px;
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      @include titleStyle2($fz: $fontL);
+      width: 130px;
+      padding: 10px 0;
+      text-align: center;
+    }
+  }
+
+  .list {
+    position: relative;
+    border-bottom: 1px solid #aaa;
+    padding: 50px 100px;
+    justify-content: space-between;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    &:first-child {
+      border-top: 1px solid #222;
+    }
+    &:last-child {
+      border-bottom: 1px solid #222;
+    }
+
+    &::after {
+      @include pseudo($t: 0, $l: 0);
+      width: 100%;
+      height: 100%;
+      transform: scale(1, 0);
+      background-color: #fff;
+      transition: 0.2s ease;
+      mix-blend-mode: difference;
+      pointer-events: none;
+    }
+    &:hover {
+      &::after {
+        transform: scale(1, 1);
+      }
+    }
+  }
+
+  > .inner {
+    padding: 200px 0 0;
+    h2 {
+      margin-left: 100px;
+      margin-right: 100px;
+      &::before {
+        bottom: -100px;
+      }
+    }
+    .titleWrap p {
+      bottom: 150px;
+    }
+    .num {
+      @include titleStyle($fz: $fontXXXL, $fw: 800, $c: #222, $lh: 1em);
+      width: 10%;
+    }
+    .txt {
+      position: relative;
+      width: 70%;
+      padding: 0 30px;
+      @include txtStyle($fz: $fontL, $c: #777, $ff: $txtFont);
+      filter: saturate(0);
+
+      .title {
+        @include titleStyle($fz: $fontXXL, $fw: 600, $c: #222);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      p {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+    .titleWrap {
+      padding-bottom: 270px;
+    }
+
+    .showBox {
+      width: 100%;
+      background-color: #fff;
+      article {
+        background: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        flex-wrap: wrap;
+        &.editTxt {
+          display: block;
+          position: fixed;
+          top: -100px;
+          right: 0;
+          width: 100vw;
+          height: 100vh;
+          z-index: 101;
+          background: #000;
+          padding: 100px;
+          > div {
+            width: 100%;
+            padding: 100px;
+            background-color: #fff;
+          }
+          input[type="text"],
+          textarea {
+            width: 100%;
+            padding: 6px 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-bottom: 1px solid #222;
+            @include txtStyle2($fz: $fontXL, $fw: 400, $c: #222);
+            background-color: #fff;
+            resize: none;
+          }
+        }
+        .btnSet {
+          display: flex;
+          align-items: center;
+
+          button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: $fontS;
+            margin-left: 30px;
+            border: none;
+            outline: none;
+            background: none;
+            cursor: pointer;
+            font-size: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+//news
+.newsList {
+  max-width: 800px;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  > div {
+    padding: 30px 50px;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .newsListTitle {
+    @include titleStyle2($fz: 3rem);
+    margin-bottom: 30px;
+  }
+  .txtTitle {
+    display: inline-block;
+    @include titleStyle($fz: $fontXL, $fw: 600, $lh: 1.3);
+    padding-bottom: 10px;
+    border-bottom: 1px solid #000;
+    margin-bottom: 20px;
+  }
+  .txt {
+    @include txtStyle2($fz: $fontM, $lh: 1.5, $c: #666);
+    overflow: auto;
+  }
+}
+//news input box
+.inputBox {
+  .inputBoxTitle {
+    @include titleStyle2($fz: 3rem);
+  }
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 50px 20px;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  > div {
+    width: 100%;
+  }
+  .btnSet {
+    display: flex;
+    align-items: center;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      @include titleStyle2($fz: $fontL);
+      width: 130px;
+      padding: 10px 0;
+      background-color: #fff;
+      text-align: center;
+      margin-right: 20px;
+      border: 1px solid #000;
+      &.saveBtn {
+        background-color: #000;
+        color: #fff;
+      }
+    }
+  }
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 6px 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 1px solid #222;
+    background-color: #fff;
+    resize: none;
+  }
+  input[type="text"] {
+    @include titleStyle($fz: $fontXL, $fw: 600, $lh: 1.3);
+  }
+  textarea {
+    height: 200px;
+    @include txtStyle2($fz: $fontM, $lh: 1.5, $c: #666);
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .News {
+    .write {
+      margin: -100px 30px 40px;
+      button {
+        width: 100px;
+      }
+    }
+    .list {
+      padding: 50px 30px;
+    }
+
+    > .inner {
+      padding: 100px 0 0;
+      h2 {
+        margin-left: 30px;
+        margin-right: 30px;
+        padding-bottom: 100px;
+        margin-bottom: 60px;
+        &::before {
+          bottom: 0px;
+        }
+      }
+      .titleWrap {
+        padding-top: 100px;
+        padding-bottom: 100px;
+        margin-bottom: 0;
+        p {
+          padding-right: 150px;
+          padding-left: 30px;
+          position: static;
+        }
+      }
+      .num {
+        margin-right: 50px;
+        font-size: 7rem;
+      }
+      .txt {
+        width: 60%;
+        padding: 0;
+        .title {
+        }
+        p {
+        }
+      }
+      .showBox {
+        article {
+          &.editTxt {
+            top: -100px;
+          }
+          .btnSet {
+            button {
+              font-size: $fontS;
+              margin-left: 15px;
+              font-size: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+  //news
+  .newsList {
+    > div {
+      padding: 30px 30px;
+    }
+  }
+  //news input box
+  .inputBox {
+    padding: 0 30px 20px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .News {
+    .write {
+      button {
+        font-size: $fontM;
+      }
+    }
+    > .inner {
+      h2 {
+        margin-bottom: 0;
+        &::before {
+          display: block;
+          bottom: 10px;
+        }
+      }
+      .titleWrap {
+        padding-top: 50px;
+        padding-bottom: 30px;
+        p {
+          font-size: $fontL;
+          margin-bottom: 100px;
+        }
+      }
+      .num {
+        width: auto;
+        display: inline-block;
+        margin-right: 0;
+        font-size: 3rem;
+      }
+      .txt {
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        .title {
+          font-size: $fontXL;
+        }
+        p {
+          font-size: $fontM;
+        }
+      }
+      .showBox {
+        article {
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          flex-direction: column;
+          align-items: baseline;
+          align-content: flex-start;
+          padding: 40px 30px;
+          &.editTxt {
+            top: -100px;
+          }
+          .btnSet {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+            button {
+              &:first-child {
+                margin-left: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  //news
+  .newsList {
+    .newsListTitle {
+      font-size: $fontXXL;
+    }
+    .txtTitle {
+      font-size: $fontL;
+      padding-bottom: 20px;
+    }
+  }
+  //news input box
+  .inputBox {
+    .inputBoxTitle {
+      font-size: $fontXXL;
+    }
+    .btnSet {
+      button {
+        width: 100px;
+        font-size: $fontM;
+      }
+    }
+    input[type="text"],
+    textarea {
+      margin-bottom: 10px;
+    }
+    input[type="text"] {
+      font-size: $fontXL;
+    }
+    textarea {
+      font-size: $fontM;
+    }
+  }
+}
+
+//news popup
+.NewsPopup {
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 101;
+  background: #000;
+  padding: 100px;
+  > div {
+    width: 100%;
+    height: 100%;
+    padding: 100px;
+    background-color: #fff;
+  }
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 6px 10px;
+    border: none;
+    border-bottom: 1px solid #222;
+    @include txtStyle2($fz: $fontXL, $fw: 400, $c: #222);
+    background-color: #fff;
+    resize: none;
+  }
+  .btnSet {
+    display: flex;
+    align-items: center;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: $fontS;
+      margin-right: 30px;
+      border: none;
+      outline: none;
+      background: none;
+      cursor: pointer;
+      font-size: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: $mp) {
+  .NewsPopup {
+    padding: 100px 30px;
+    .btnSet {
+      button {
+        font-size: $fontM;
+      }
+    }
+  }
+}

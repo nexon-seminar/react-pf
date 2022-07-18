@@ -1,0 +1,94 @@
+//header color
+$mainMenuColor: #fff;
+$mainMenuBgColor: #222;
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #000;
+  .inner {
+    height: 100px;
+    padding: 0px 100px;
+    position: relative;
+    h1 {
+      position: absolute;
+      bottom: 20px;
+      left: 100px;
+
+      a {
+        @include titleStyle($fz: $fontXXL, $c: $mainMenuColor);
+      }
+    }
+
+    #gnb {
+      position: absolute;
+      bottom: 10px;
+      right: 200px;
+
+      li {
+        float: left;
+
+        a {
+          display: inline-block;
+          padding: 20px 0;
+          margin-left: 60px;
+          @include titleStyle($fz: $fontL, $c: $mainMenuColor);
+        }
+      }
+    }
+
+    .fa-bars {
+      position: absolute;
+      top: 40px;
+      right: 100px;
+      font-size: $fontXL;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+
+  &.main {
+    background: transparent;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+
+    .inner {
+      h1 a {
+        color: $mainMenuColor;
+      }
+
+      #gnb li a {
+        color: $mainMenuColor;
+      }
+
+      .fa-bars {
+        color: $mainMenuColor;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  header {
+    .inner {
+      width: 100%;
+      padding: 0px 30px;
+      h1 {
+        left: 30px;
+      }
+      #gnb {
+        display: none;
+      }
+      .fa-bars {
+        right: 30px;
+        display: block;
+        color: #fff;
+      }
+    }
+  }
+}

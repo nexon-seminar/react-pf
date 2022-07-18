@@ -1,0 +1,48 @@
+footer {
+  width: 100%;
+  .inner {
+    padding: 50px 100px;
+    position: relative;
+    &::after {
+      @include cb();
+    }
+    p {
+      float: right;
+      @include txtStyle($fz: $fontM, $c: #999, $fw: 600);
+    }
+    a {
+      display: inline-block;
+      vertical-align: top;
+      @include txtStyle($fz: $fontM, $c: #999, $fw: 600);
+      &:hover {
+        color: $maincolor;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  footer {
+    .inner {
+      padding: 50px 30px;
+      p {
+      }
+      a {
+      }
+    }
+  }
+}
+@media screen and (max-width: $mp) {
+  footer {
+    text-align: center;
+    .inner {
+      padding: 50px 30px;
+      p {
+        float: none;
+      }
+      .footerLink {
+        display: none;
+      }
+    }
+  }
+}

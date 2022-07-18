@@ -1,0 +1,54 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+strong,
+em {
+  font-weight: normal;
+}
+ul,
+ol,
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+em,
+i {
+  font-style: normal;
+}
+table {
+  border-collapse: collapse;
+}
+fieldset {
+  border: none;
+}
+.h {
+  position: absolute;
+  top: -9999px;
+  opacity: 0;
+}
+img {
+  vertical-align: top;
+}
+body {
+  font-family: $txtFont;
+  font-size: $fontS;
+  font-weight: 400;
+  background-color: #000;
+}
+.h {
+  position: absolute;
+  top: -9999px;
+  opacity: 0;
+}
+img {
+  vertical-align: top;
+}

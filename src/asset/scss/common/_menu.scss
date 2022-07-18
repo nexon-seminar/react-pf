@@ -1,0 +1,95 @@
+#mobileGnb {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 101;
+  display: flex;
+  .menu {
+    padding: 50px 100px;
+    height: 100%;
+  }
+  .left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    background-color: #000;
+  }
+  .right {
+    width: 70%;
+    background-color: #fff;
+  }
+  h1 {
+    a {
+      @include titleStyle($fz: $fontXXXL, $c: $mainMenuColor);
+    }
+    margin-bottom: 50px;
+  }
+
+  ul {
+    li a {
+      position: relative;
+      display: inline-block;
+      @include titleStyle($fz: 7vh, $c: #000);
+      overflow: hidden;
+      vertical-align: top;
+      transition: 0.25s $easing;
+      &::before {
+        display: block;
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-right: 10px;
+        width: 0;
+        height: 0.7vh;
+        background-color: #000;
+        transition: 0.25s $easing;
+      }
+      &:hover {
+        padding-left: 7vh;
+        &::before {
+          width: 5vh;
+        }
+      }
+      &.disabled {
+        opacity: 0.3;
+      }
+    }
+  }
+}
+@media screen and (max-width: $tablet) {
+  #mobileGnb {
+    .menu {
+      padding: 40px;
+    }
+    h1 a {
+      font-size: 5vw;
+    }
+    ul {
+      li a {
+        font-size: 6vh;
+        &:hover {
+          padding-left: 6vh;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #mobileGnb {
+    .menu {
+      padding: 40px 30px;
+    }
+    .right {
+      width: 100%;
+    }
+    ul li a {
+      font-size: 4vh;
+    }
+  }
+}
